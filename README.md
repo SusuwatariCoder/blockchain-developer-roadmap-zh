@@ -1,9 +1,6 @@
-# 区块链开发者路线
-
-## 网站
-
-[访问网站](https://aturx.github.io/blockchain-developer-roadmap/)
+# 区块链开发者路线 | [访问网站](https://susuwataricoder.github.io/blockchain-developer-roadmap-zh/.)
  
+
 ## 路线图
 
 
@@ -11,7 +8,18 @@
 
 
 
-## 资源列表
+# 资源列表
+
+## 基础与概念
+
+### 了解比特币
+- [比特币指南](https://learnblockchain.cn/article/1001)
+
+
+### 了解区块链
+- [区块链指南](#)
+
+
 
 
 
