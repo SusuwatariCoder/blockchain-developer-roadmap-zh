@@ -37,24 +37,23 @@ var bytecode = compiledContract.contracts['HelloWorld.sol']['HelloWorld'].evm.by
 // 创建合约 实例化  
 var HelloWorld = new web3.eth.Contract(abi)
 
-// 创建交易 并 发送交易   
-HelloWorld.deploy(
-  { 
-    data: bytecode,
-    arguments: [web3.utils.asciiToHex('Hello world!')]
-  })
-.send({
-    from: '0x2EB27AfB3dE4D99F3425f4d3A8f8Df91a2FF0b12',
-    gas: 1500000,
-    gasPrice: '30000000000000'
-}, function(error, transactionHash){ console.log("TransactionsHash: ",transactionHash) })
-.then(function(HelloContractInstance){
-    console.log("Contract Address: ",HelloContractInstance.options.address) // 新部署的 HelloWorld 合约的实例： 可调用其方法
-    console.log(HelloContractInstance.methods)
-    // https://web3js.readthedocs.io/en/v1.3.4/web3-eth-contract.html?highlight=deploy#contract-send
-    console.log(HelloContractInstance.methods.getMessage().call().then((hex)=>{
-      console.log(web3.utils.hexToAscii(hex))
-    }))
-});
-  
-console.log("deploy end ...") 
+// 创建交易   
+var HelloWorldTx = HelloWorld.deploy({data: bytecode, arguments: [web3.utils.asciiToHex('00000012')]})
+ 
+
+
+
+// 发起交易  (from : 选择用来发起部署合约交易的地址， gas 不够则增大值)
+var contractInstance = HelloWorldTx.send({from: '0x1448ff9eb160a363e532b919c8e41fdc9b70eab5', gas: 1000000})
+
+ // ? ? ? 
+contractInstance.then((newContractInstance)=>{
+  // 调用合约函数
+  data = newContractInstance.methods.getMessage().call();  // Error: Returned error: VM Exception while processing transaction: invalid opcode
+  // var result = web3.utils.hexToAscii(data());  
+  console.log(data);
+
+  });
+
+
+console.log("end ...") 
